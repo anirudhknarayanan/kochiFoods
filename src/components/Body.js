@@ -7,6 +7,7 @@ const Body = () => {
 
   const [restList, setrestList] = useState([]);
    const [filterRest,setFilterRest] = useState([])
+   const [searchText , setsearchText] = useState("")
 
   useEffect(() => {
     fetchData();
@@ -31,9 +32,14 @@ const Body = () => {
     <div className="body">
       <div className="top-section">
         <div className="search">
-          <input type="text" placeholder="Search restaurants..." />
+          <input type="text" placeholder="Search restaurants..." value={searchText} onChange={(e)=>{
+                setsearchText(e.target.value)
+          }} />
 
-          <button className="search-btn">Search</button>
+          <button className="search-btn" onClick={()=>{
+               let filter =   restList.filter((rest)=>rest.info.name.toLowerCase().includes(searchText.toLowerCase()))
+               setFilterRest(filter)
+          }}>Search</button>
         </div>
 
 
