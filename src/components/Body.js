@@ -1,6 +1,7 @@
 import RestuarentCard from "./RestaurentCard";
 import { useEffect, useState } from "react";
 import { CDN_URL } from "../utils/constants";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
 
@@ -26,7 +27,7 @@ const Body = () => {
   };
 
 
-  return (
+  return restList.length === 0 ? <Shimmer/> : (
     <div className="body">
       <div className="top-section">
         <div className="search">
@@ -42,7 +43,7 @@ const Body = () => {
            let topFilter = restList.filter((rest)=>rest.info.avgRating > 4.4)
 
            setFilterRest(topFilter)
-           
+
           }}>TOP RATING RESTAURANTS</button>
         </div>
       </div>
