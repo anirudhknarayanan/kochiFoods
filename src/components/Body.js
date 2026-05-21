@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { CDN_URL } from "../utils/constants";
 
 const Body = () => {
+
   const [restList, setrestList] = useState([]);
+   const [filterRest,setFilterRest] = useState([])
 
   useEffect(() => {
     fetchData();
@@ -19,42 +21,46 @@ const Body = () => {
         (item) => item?.card?.card?.gridElements?.infoWithStyle?.restaurants,
       )?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
 
-    console.log(restaurants);
     setrestList(restaurants);
+    setFilterRest(restaurants)
   };
-return (
-  <div className="body">
 
-    <div className="top-section">
 
-      <div className="search">
-        <input
-          type="text"
-          placeholder="Search restaurants..."
-        />
+  return (
+    <div className="body">
+      <div className="top-section">
+        <div className="search">
+          <input type="text" placeholder="Search restaurants..." />
+
+          <button className="search-btn">Search</button>
+        </div>
+
+
+        <div className="topFilter">
+
+          <button onClick={()=>{
+           let topFilter = restList.filter((rest)=>rest.info.avgRating > 4.4)
+
+           setFilterRest(topFilter)
+           
+          }}>TOP RATING RESTAURANTS</button>
+        </div>
       </div>
 
-      <div className="topFilter">
-        <button>TOP RATING RESTAURANTS</button>
+      <div className="rest-container">
+        {filterRest.map((res) => (
+          <RestuarentCard
+            key={res.info.id}
+            restName={res.info.name}
+            rate={res.info.avgRating}
+            image={CDN_URL + res.info.cloudinaryImageId}
+            time={res.info.sla.slaString}
+            cuisines={res.info.cuisines.join(", ")}
+          />
+        ))}
       </div>
-
     </div>
-
-    <div className="rest-container">
-      {restList.map((res) => (
-        <RestuarentCard
-          key={res.info.id}
-          restName={res.info.name}
-          rate={res.info.avgRating}
-          image={CDN_URL + res.info.cloudinaryImageId}
-          time={res.info.sla.slaString}
-          cuisines={res.info.cuisines.join(", ")}
-        />
-      ))}
-    </div>
-
-  </div>
-);
+  );
 };
 
 export default Body;
