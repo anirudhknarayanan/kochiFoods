@@ -1,0 +1,28 @@
+{
+  "name": "foodapp",
+  "version": "1.0.0",
+  "description": "food exploring app",
+  "scripts": {
+    "start": "parcel index.html",
+    "build" : "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anirudhknarayanan/kochiFoods.git"
+  },
+  "keywords": [],
+  "author": "anirudh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anirudhknarayanan/kochiFoods/issues"
+  },
+  "homepage": "https://github.com/anirudhknarayanan/kochiFoods#readme",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  }
+}
