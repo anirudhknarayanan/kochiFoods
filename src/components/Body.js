@@ -2,6 +2,7 @@ import RestuarentCard from "./RestaurentCard";
 import { useEffect, useState } from "react";
 import { CDN_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
 
@@ -56,14 +57,14 @@ const Body = () => {
 
       <div className="rest-container">
         {filterRest.map((res) => (
-          <RestuarentCard
+         <Link key={res.info.id} to={"/restaurants/"+res.info.id}><RestuarentCard
             key={res.info.id}
             restName={res.info.name}
             rate={res.info.avgRating}
             image={CDN_URL + res.info.cloudinaryImageId}
             time={res.info.sla.slaString}
             cuisines={res.info.cuisines.join(", ")}
-          />
+          /></Link> 
         ))}
       </div>
     </div>

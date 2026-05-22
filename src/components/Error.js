@@ -1,13 +1,17 @@
+import { useRouteError } from "react-router-dom";
+
 const Error = () => {
+  const err = useRouteError();
+
   return (
     <div className="error-container">
-      <h1>404</h1>
-      <h2>Oops! Page Not Found</h2>
-      <p>
-        The page you are looking for does not exist or has been moved.
-      </p>
+      <h1>Oops 😢</h1>
 
-      <button onClick={() => window.location.href = "/"}>
+      <h2>{err.status} : {err.statusText}</h2>
+
+      <p>{err.data}</p>
+
+      <button onClick={() => (window.location.href = "/")}>
         Go Back Home
       </button>
     </div>

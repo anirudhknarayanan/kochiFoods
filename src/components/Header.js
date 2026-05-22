@@ -1,5 +1,6 @@
 import { LOGO_URL } from "../utils/constants";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const Header = () => {
   const [onlineText,setonlineText] = useState("login")
   return (
@@ -15,9 +16,14 @@ const Header = () => {
 
       <nav className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About</li>
+          <li><Link to="/">Home</Link></li>
+          <li>
+            <Link to="/about">About</Link>
+            </li>
           <li>Restaurants</li>
+          <li>
+            <Link to="/contact">contact</Link>
+          </li>
           <li>Cart 🛒</li>
           <li onClick={()=>{
             onlineText === "login" ? setonlineText("logout") : setonlineText("login")
