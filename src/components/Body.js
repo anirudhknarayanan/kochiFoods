@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { CDN_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import onlineStatus from "../utils/onlineStatus";
+import Offline from "./Offline";
 
 const Body = () => {
 
@@ -27,6 +29,10 @@ const Body = () => {
     setrestList(restaurants);
     setFilterRest(restaurants)
   };
+   let status = onlineStatus()
+  if(status === false){
+    return <Offline/>
+  }
 
 
   return restList.length === 0 ? <Shimmer/> : (
@@ -57,7 +63,7 @@ const Body = () => {
 
       <div className="rest-container">
         {filterRest.map((res) => (
-         <Link key={res.info.id} to={"/restaurants/"+res.info.id}><RestuarentCard
+         <Link key={res.info.id} className="restaurant-link" to={"/restaurants/"+res.info.id}><RestuarentCard
             key={res.info.id}
             restName={res.info.name}
             rate={res.info.avgRating}
