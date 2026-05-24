@@ -1,5 +1,4 @@
 const RestuarentCard = (props) => {
-
   const {
     restName,
     rate,
@@ -9,34 +8,50 @@ const RestuarentCard = (props) => {
   } = props;
 
   return (
-    <div className="restCard">
+    <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition duration-300 cursor-pointer">
+      
+      {/* Food Image */}
+      <div className="relative">
+        <img
+          className="w-full h-52 object-cover"
+          src={image}
+          alt="food"
+        />
 
-      <img
-        className="food-img"
-        src={image}
-        alt="food"
-      />
+        {/* Delivery Time Badge */}
+        <span className="absolute bottom-3 right-3 bg-white px-3 py-1 rounded-lg text-sm font-semibold shadow">
+          {time}
+        </span>
+      </div>
 
-      <div className="rest-content">
+      {/* Content */}
+      <div className="p-4">
 
-        <h3>{restName}</h3>
+        {/* Restaurant Name */}
+        <h3 className="text-xl font-bold text-gray-800 truncate">
+          {restName}
+        </h3>
 
-        <p className="cuisine">{cuisines}</p>
+        {/* Cuisine */}
+        <p className="text-gray-500 text-sm mt-2 line-clamp-2">
+          {cuisines}
+        </p>
 
-        <div className="bottom-row">
+        {/* Bottom Row */}
+        <div className="flex items-center justify-between mt-4">
 
-          <span className="rating">
+          {/* Rating */}
+          <span className="bg-green-600 text-white px-3 py-1 rounded-lg text-sm font-semibold">
             ⭐ {rate}
           </span>
 
-          <span className="time">
-            {time}
+          {/* Delivery */}
+          <span className="text-gray-600 font-medium text-sm">
+            🚚 Fast Delivery
           </span>
 
         </div>
-
       </div>
-
     </div>
   );
 };

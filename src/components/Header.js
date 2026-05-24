@@ -2,47 +2,96 @@ import { LOGO_URL } from "../utils/constants";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import onlineStatus from "../utils/onlineStatus";
+
 const Header = () => {
-  const [onlineText, setonlineText] = useState("login");
-  let status = onlineStatus()
+  const [onlineText, setonlineText] = useState("Login");
+
+  const status = onlineStatus();
+
   return (
-    <header className="header">
-      <div className="logo-container">
-        <img className="logo" src={LOGO_URL} alt="food-logo" />
-        <h2>CochinFoods</h2>
+    <header className="flex items-center justify-between px-10 py-4 bg-white shadow-md sticky top-0 z-50">
+      
+      {/* Logo Section */}
+      <div className="flex items-center gap-3">
+        <img
+          className="w-16 h-16 rounded-full object-cover"
+          src={LOGO_URL}
+          alt="food-logo"
+        />
+
+        <h2 className="text-2xl font-bold text-orange-500 tracking-wide">
+          CochinFoods
+        </h2>
       </div>
 
-      <nav className="nav-items">
-        <ul>
-          <li>
-            <span>{status ? "🟢" : "🔴"}</span>
+      {/* Navigation */}
+      <nav>
+        <ul className="flex items-center gap-8 text-[17px] font-medium text-gray-700">
+          
+          {/* Online Status */}
+          <li className="flex items-center gap-2">
+            <span className="text-xl">
+              {status ? "🟢" : "🔴"}
+            </span>
+
+            <span className="text-sm text-gray-500">
+              {status ? "Online" : "Offline"}
+            </span>
           </li>
+
           <li>
-            <Link className="nav-link" to="/">
+            <Link
+              className="hover:text-orange-500 transition duration-200"
+              to="/"
+            >
               Home
             </Link>
           </li>
 
           <li>
-            <Link className="nav-link" to="/about">
+            <Link
+              className="hover:text-orange-500 transition duration-200"
+              to="/grocery"
+            >
+              Grocery
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              className="hover:text-orange-500 transition duration-200"
+              to="/about"
+            >
               About
             </Link>
           </li>
 
           <li>
-            <Link className="nav-link" to="/contact">
+            <Link
+              className="hover:text-orange-500 transition duration-200"
+              to="/contact"
+            >
               Contact
             </Link>
           </li>
-          <li>Cart 🛒</li>
-          <li
-            onClick={() => {
-              onlineText === "login"
-                ? setonlineText("logout")
-                : setonlineText("login");
-            }}
-          >
-            {onlineText}
+
+          {/* Cart */}
+          <li className="cursor-pointer hover:text-orange-500 transition duration-200">
+            Cart 🛒
+          </li>
+
+          {/* Login Button */}
+          <li>
+            <button
+              onClick={() => {
+                onlineText === "Login"
+                  ? setonlineText("Logout")
+                  : setonlineText("Login");
+              }}
+              className="bg-orange-500 text-white px-5 py-2 rounded-lg hover:bg-orange-600 transition duration-300 shadow-md"
+            >
+              {onlineText}
+            </button>
           </li>
         </ul>
       </nav>
