@@ -1,4 +1,4 @@
-import RestuarentCard from "./RestaurentCard";
+import RestuarentCard ,{OpenRestaurent, OpenRestaurent}from "./RestaurentCard";
 import { useEffect, useState } from "react";
 import { CDN_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
@@ -10,10 +10,13 @@ const Body = () => {
   const [restList, setrestList] = useState([]);
   const [filterRest, setFilterRest] = useState([]);
   const [searchText, setsearchText] = useState("");
+const WithOpenRestaurent = OpenRestaurent(RestuarentCard)
+  
 
   useEffect(() => {
     fetchData();
   }, []);
+  console.log(restList)
 
   const fetchData = async () => {
     try {
@@ -103,13 +106,21 @@ const Body = () => {
             className="hover:scale-95 transition duration-300"
             to={"/restaurants/" + res.info.id}
           >
-            <RestuarentCard
+            {res.info.isOpen ?
+  
+            (<WithOpenRestaurent restName={res.info.name}
+              rate={res.info.avgRating}
+              image={CDN_URL + res.info.cloudinaryImageId}
+              time={res.info.sla.slaString}
+              cuisines={res.info.cuisines.join(", ")}/>)  :  
+              ( <RestuarentCard
               restName={res.info.name}
               rate={res.info.avgRating}
               image={CDN_URL + res.info.cloudinaryImageId}
               time={res.info.sla.slaString}
               cuisines={res.info.cuisines.join(", ")}
-            />
+            />) }
+           
           </Link>
         ))}
       </div>

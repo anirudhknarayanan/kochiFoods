@@ -56,4 +56,20 @@ const RestuarentCard = (props) => {
   );
 };
 
+
+export const OpenRestaurent = (RestaurentCard)=>{
+  return (props)=>{
+   return(<div className="relative">
+      
+        {/* Open Badge */}
+        <span className="absolute top-3 left-3 z-10 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-lg shadow-lg">
+          OPEN
+        </span>
+    <RestuarentCard {...props}/>
+    </div>)
+    
+
+  }
+}
+
 export default RestuarentCard;
