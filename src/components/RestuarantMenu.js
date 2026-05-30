@@ -1,9 +1,17 @@
 import menuData from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const RestaurantMenu = () => {
   const [menu, setMenu] = useState([]);
+
+  const dispatch = useDispatch()
+  
+  const handleAddItem = (item)=>{
+    dispatch(addItem(item))
+  }
 
   useEffect(() => {
     setTimeout(() => {
@@ -81,7 +89,7 @@ const RestaurantMenu = () => {
               />
 
               {/* Add Button */}
-              <button className="absolute bottom-[-12px] bg-white text-green-600 font-bold px-8 py-2 rounded-xl shadow-lg border hover:bg-green-50 transition duration-300">
+              <button className="absolute bottom-[-12px] bg-white text-green-600 font-bold px-8 py-2 rounded-xl shadow-lg border hover:bg-green-50 transition duration-300" onClick={()=>handleAddItem(item)}>
                 ADD
               </button>
             </div>
