@@ -1,14 +1,26 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../utils/cartSlice";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
+  const dispatch = useDispatch()
+  const handleClearCart =()=>{
+    dispatch(clearCart())
+  }
 
   return (
+
     <div className="p-5">
       <h1 className="text-3xl font-bold mb-5">
         Cart ({cartItems.length} items)
       </h1>
 
+      <button
+        onClick={handleClearCart}
+        className="bg-orange-500 text-white px-5 py-2 rounded-lg hover:bg-orange-600 transition duration-300 shadow-md mb-5"
+      >
+        Clear Cart
+      </button>
       {cartItems.length === 0 ? (
         <h2>Your cart is empty 🛒</h2>
       ) : (
